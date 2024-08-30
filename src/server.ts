@@ -6,6 +6,7 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
+import { loginUser } from './routes/login'
 
 const app = fastify()
 
@@ -17,6 +18,7 @@ app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
 app.register(createUser)
+app.register(loginUser)
 
 app
   .listen({
