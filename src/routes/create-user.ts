@@ -18,13 +18,13 @@ export async function createUser(app: FastifyInstance) {
     },
     async (request, reply) => {
       const { email, name, password } = request.body
-      
+
       const password_hash = await hash(password, 6)
 
       const userWithSameEmail = await prisma.user.findUnique({
         where: {
-          email
-        }
+          email,
+        },
       })
 
       if (userWithSameEmail) {

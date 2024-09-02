@@ -3,10 +3,8 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma'
 import { compare } from 'bcryptjs'
-import { env } from '../env'
-import jwt from 'jsonwebtoken'
 
-export async function loginUser(app: FastifyInstance) {
+export async function authenticate(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
     '/login',
     {
@@ -36,12 +34,11 @@ export async function loginUser(app: FastifyInstance) {
         return reply.status(401).send({ error: 'Invalid password.' })
       }
 
-      const token = jwt.sign(
+      const token = app.jwt.sign(
         {
           email: user.email,
           name: user.name,
         },
-        env.JWT_SECRET as string,
         {
           expiresIn: '1h',
         },
