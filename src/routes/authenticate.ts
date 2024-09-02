@@ -25,13 +25,13 @@ export async function authenticate(app: FastifyInstance) {
       })
 
       if (!user) {
-        return reply.status(401).send({ error: 'Invalid email' })
+        return reply.status(401).send({ error: 'Invalid email or password' })
       }
 
       const isPasswordValid = await compare(password, user.password)
 
       if (!isPasswordValid) {
-        return reply.status(401).send({ error: 'Invalid password.' })
+        return reply.status(401).send({ error: 'Invalid email or password.' })
       }
 
       const token = app.jwt.sign(

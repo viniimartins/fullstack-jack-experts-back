@@ -8,6 +8,7 @@ import {
 import { authenticate } from './routes/authenticate'
 import fastifyJwt from '@fastify/jwt'
 import { createTask } from './routes/create-task'
+import { deleteTask } from './routes/delete-task'
 
 const app = fastify()
 
@@ -21,6 +22,7 @@ app.setSerializerCompiler(serializerCompiler)
 app.register(createUser)
 app.register(authenticate)
 app.register(createTask)
+app.register(deleteTask)
 
 app
   .listen({
