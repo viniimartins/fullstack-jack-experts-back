@@ -10,8 +10,14 @@ import fastifyJwt from '@fastify/jwt'
 import { createTask } from './routes/create-task'
 import { deleteTask } from './routes/delete-task'
 import { updateTask } from './routes/update-task'
+import fastifyCors from '@fastify/cors'
+import { getTask } from './routes/get-task'
 
 const app = fastify()
+
+app.register(fastifyCors, {
+  origin: '*',
+})
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
@@ -25,6 +31,7 @@ app.register(authenticate)
 app.register(createTask)
 app.register(deleteTask)
 app.register(updateTask)
+app.register(getTask)
 
 app
   .listen({

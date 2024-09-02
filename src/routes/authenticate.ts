@@ -6,7 +6,7 @@ import { compare } from 'bcryptjs'
 
 export async function authenticate(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
-    '/login',
+    '/auth',
     {
       schema: {
         body: z.object({
@@ -36,6 +36,7 @@ export async function authenticate(app: FastifyInstance) {
 
       const token = app.jwt.sign(
         {
+          id: user.id,
           email: user.email,
           name: user.name,
         },
