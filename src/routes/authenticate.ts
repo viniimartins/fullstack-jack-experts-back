@@ -11,7 +11,10 @@ export async function authenticate(app: FastifyInstance) {
       schema: {
         body: z.object({
           email: z.string().email(),
-          password: z.string(),
+          password: z
+            .string()
+            .min(8)
+            .regex(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/),
         }),
       },
     },

@@ -26,7 +26,7 @@ export async function getTask(app: FastifyInstance) {
         },
       })
 
-      reply.send({ tasks })
+      reply.send(tasks)
     },
   )
 }

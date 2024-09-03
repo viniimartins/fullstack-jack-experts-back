@@ -1,6 +1,6 @@
 import fastify from 'fastify'
 import { env } from './env'
-import { createUser } from './routes/create-user'
+import { accountRegistration } from './routes/account-registration'
 import {
   serializerCompiler,
   validatorCompiler,
@@ -26,7 +26,7 @@ app.register(fastifyJwt, {
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
-app.register(createUser)
+app.register(accountRegistration)
 app.register(authenticate)
 app.register(createTask)
 app.register(deleteTask)

@@ -4,15 +4,18 @@ import { z } from 'zod'
 import { prisma } from '../lib/prisma'
 import { hash } from 'bcryptjs'
 
-export async function createUser(app: FastifyInstance) {
+export async function accountRegistration(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
-    '/user',
+    '/account-registration',
     {
       schema: {
         body: z.object({
           name: z.string(),
           email: z.string().email(),
-          password: z.string(),
+          password: z
+            .string()
+            .min(8)
+            .regex(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/),
         }),
       },
     },
@@ -28,7 +31,7 @@ export async function createUser(app: FastifyInstance) {
       })
 
       if (userWithSameEmail) {
-        return reply.status(409).send({ message: 'User nao encontrado' })
+        return reply.status(409).send({ response: 'email' })
       }
 
       await prisma.user.create({
