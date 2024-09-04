@@ -42,7 +42,7 @@ Crie um arquivo .env.local na raiz do projeto e adicione as variáveis de ambien
 Execute o seguinte comando para aplicar as migrações e configurar seu banco de dados:
 
 ```bash
-npx prisma migrate status
+npx prisma migrate dev
 ```
 
 ### 5. Executar o Projeto
