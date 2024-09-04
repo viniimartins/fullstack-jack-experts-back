@@ -37,11 +37,19 @@ npm install
 
 Crie um arquivo .env.local na raiz do projeto e adicione as variáveis de ambiente necessárias. Consulte o arquivo .env.example para saber quais variáveis são necessárias.
 
-### 4. Executar o Projeto
+### 5. Executar Migrations
+
+Execute o seguinte comando para aplicar as migrações e configurar seu banco de dados:
+
+```bash
+npx prisma migrate status
+```
+
+### 5. Executar o Projeto
 Para iniciar o servidor de desenvolvimento, execute:
 
 ```bash
-docker compose up
+npm run dev
 ```
 
 O projeto estará disponível em http://localhost:3333.
